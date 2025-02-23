@@ -3,6 +3,7 @@ package com.blurdel.springai.controllers;
 import com.blurdel.springai.model.Question;
 import com.blurdel.springai.services.OpenAIService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,8 +14,8 @@ public class QuestionController {
 
     private final OpenAIService service;
 
-    @PostMapping("/ask")
-    public Object askQuestion(@RequestBody Question question) {
+    @PostMapping(value = "/image", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] askQuestion(@RequestBody Question question) {
         return service.getImage(question);
     }
 

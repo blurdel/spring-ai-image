@@ -6,6 +6,7 @@ import org.springframework.ai.image.ImageModel;
 import org.springframework.ai.image.ImagePrompt;
 import org.springframework.ai.openai.OpenAiImageOptions;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Base64;
 
@@ -23,7 +24,7 @@ public class OpenAIServiceImpl implements OpenAIService {
                 .withHeight(1024).withWidth(1024)
                 .withResponseFormat("b64_json")
                 .withModel("dall-e-3")
-//                .withQuality("hd") // default standard
+                .withQuality("hd") // default standard
 //                .withStyle("natural") // default vivid
                 .build();
 
@@ -32,6 +33,11 @@ public class OpenAIServiceImpl implements OpenAIService {
         var imageResponse = imageModel.call(imagePrompt);
 
         return Base64.getDecoder().decode(imageResponse.getResult().getOutput().getB64Json());
+    }
+
+    @Override
+    public String getDescription(MultipartFile file) {
+        return "";
     }
 
 }
